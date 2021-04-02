@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  google-timeline-to-calendar
+
+  SAM Template for timeline
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Parameters:
+  BucketName:
+    Type: String
+    Default: google-timeline-to-calendar
+
+Resources:
+  GoogleTimelineToCalendar:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: .
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      MemorySize: 128
+      Timeout: 120
+      Environment:
+        Variables:
+          S3_BUCKET: !Ref BucketName
+          TOKEN_KEY: "token.pickle"
+      Policies:
+        - S3CrudPolicy:
+            BucketName: !Sub "${BucketName}"
+      Events:
+        CWSchedule:
+          Type: Schedule
+          Properties:
+            Schedule: "rate(1 day)"
+            Name: GoogleTimelineCalendar
+            Description: Daily Timeline Event
+            Enabled: True
+
+  GoogleTimeLineToCalendardBucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: !Sub "${BucketName}"
