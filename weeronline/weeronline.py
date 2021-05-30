@@ -49,9 +49,8 @@ class Weeronline(object):
       weather_digits = [d['digits']['weather'] for d in data]
       weather_temps = [round(d['temperature']['feelsLike'],1) for d in data]
 
-      delta = 0
       for i, v in enumerate(data):
-        day = self.date + timedelta(days=delta)
+        day = self.date + timedelta(days=i)
         weather_result = WeatherForecast(
           date=day.strftime("%Y-%m-%d"),
           digit=weather_digits[i],
@@ -60,6 +59,5 @@ class Weeronline(object):
         )
 
         result.append(weather_result)
-        delta+=1
 
     return result
