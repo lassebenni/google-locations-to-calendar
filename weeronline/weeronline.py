@@ -51,15 +51,15 @@ class Weeronline(object):
 
       delta = 0
       for i, v in enumerate(data):
-        delta+=1
         day = self.date + timedelta(days=delta)
-
         weather_result = WeatherForecast(
           date=day.strftime("%Y-%m-%d"),
           digit=weather_digits[i],
           temperature= weather_temps[i],
           url=BROWSER_URL
         )
+
         result.append(weather_result)
+        delta+=1
 
     return result
