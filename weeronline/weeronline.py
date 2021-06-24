@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from dataclasses import dataclass
 
 BROWSER_URL = "https://www.weeronline.nl/Europa/Nederland/Utrecht/4058499"
-URL = "https://www.weeronline.nl/api/mosForecastService;geoAreaId=4058499;interval=1D;offsetEnd=13;offsetStart=0?returnMeta=true" # Utrecht, Netherlands
+URL = "https://www.weeronline.nl/api/phoenix/forecastDay/4058499/0/13/1" # Utrecht, Netherlands
 
 PAYLOAD={}
 HEADERS = {
