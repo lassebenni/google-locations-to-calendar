@@ -48,9 +48,9 @@ def test_local():
     file.close()
     calendar_id = ''
     calendar = Calendar(calendar_id, bytes)
-    response_url = add_timeline_events(calendar, 'test')
+    # response_url = add_timeline_events(calendar, 'test')
     weather_calendar = WeatherToGoogleCalendar(calendar)
-    weather_calendar.delete_all_weather_events()
+    # weather_calendar.delete_all_weather_events()
     weather_calendar.create_weather_forecasts()
 
 if __name__ == "__main__":
