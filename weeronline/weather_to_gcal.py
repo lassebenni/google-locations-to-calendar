@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from gcalendar.calendar import Calendar, CalendarEvent
 from weeronline.weeronline import Weeronline, WeatherForecast
 from dataclasses import dataclass
@@ -73,9 +73,13 @@ class WeatherToGoogleCalendar(object):
     result: List[WeatherEvent] = []
 
     if not start_date:
-      tz_iso_stamp = self.date.astimezone().isoformat()
+      today = self.date.astimezone()
+      previous_day = today - timedelta(days=1)
+      tz_iso_stamp  = previous_day.isoformat()
     else:
-      tz_iso_stamp = datetime.strptime(start_date, '%Y-%m-%d').astimezone().isoformat()
+      day = datetime.strptime(start_date, '%Y-%m-%d').astimezone()
+      previous_day = day - timedelta(days=1)
+      tz_iso_stamp = previous_day.isoformat()
 
     events = self.calendar.list_events(query='Weeronline', min_datetime = tz_iso_stamp)
 

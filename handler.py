@@ -20,15 +20,12 @@ def lambda_handler(event, context):
     auth_token = s3.get_object(
         Bucket=bucket_name, Key=token_key)['Body'].read()
     calendar = Calendar(calendar_id, auth_token)
-    response_url = add_timeline_events(calendar, timeline_url)
     weather_calendar = WeatherToGoogleCalendar(calendar)
-    weather_calendar.delete_all_weather_events()
     weather_results = weather_calendar.create_weather_forecasts()
 
     return {
         "statusCode": 200,
         "body": json.dumps({
-            "timeline": f"Response URL: {response_url}",
             "weather": f"Weather forecast: {weather_results}",
         }),
     }
