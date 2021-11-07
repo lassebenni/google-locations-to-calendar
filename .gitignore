@@ -6,3 +6,4 @@ token.pickle
 .aws-sam/
 
 samconfig.toml
+.venv/
