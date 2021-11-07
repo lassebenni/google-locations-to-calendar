@@ -1,9 +1,10 @@
 class Timeline(object):
-  timeline: str = ""
+    timeline: str = ""
 
-  """Wrapper for Google Timeline."""
-  def __init__(self, timeline: str = ""):
-    self.timeline = timeline
+    """Wrapper for Google Timeline."""
 
-  def create_timeline_url(self, date: str):
-    return self.timeline + date
+    def __init__(self, timeline: str = ""):
+        self.timeline = timeline
+
+    def create_timeline_url(self, date: str):
+        return self.timeline + date
