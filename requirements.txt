@@ -1,5 +1,5 @@
 boto3==1.15.18
 google-api-python-client==1.12.3
 google-auth-httplib2==0.0.4
-google-auth-oauthlib==0.4.1
+google-auth-oauthlib==0.4.6
 protobuf<3.16.0
